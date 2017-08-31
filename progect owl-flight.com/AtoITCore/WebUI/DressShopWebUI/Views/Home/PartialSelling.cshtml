@@ -1,0 +1,132 @@
+﻿@model Domain.Entityes.Product
+<style>
+    .modalDialog {
+        position: fixed;
+        font-family: Arial, Helvetica, sans-serif;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: #000000;
+        background: rgba(0,0,0,0.5);
+        z-index: 99999;
+        -webkit-transition: opacity 400ms ease-in;
+        -moz-transition: opacity 400ms ease-in;
+        transition: opacity 400ms ease-in;
+        display: none;
+        pointer-events: none;
+    }
+
+    .modalDialog:target {
+            display: block;
+            pointer-events: auto;
+        }
+
+        .modalDialog > div {
+            width: 400px;
+            position: relative;
+            margin: 10% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 10px;
+            background: #fff;
+            background: -moz-linear-gradient(#fff, #999);
+            background: -webkit-linear-gradient(#fff, #999);
+            background: -o-linear-gradient(#fff, #999);
+        }
+
+    .close {
+        background: #606061;
+        color: #FFFFFF;
+        line-height: 25px;
+        position: absolute;
+        right: -12px;
+        text-align: center;
+        top: -10px;
+        width: 24px;
+        text-decoration: none;
+        font-weight: bold;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        border-radius: 12px;
+        -moz-box-shadow: 1px 1px 3px #000;
+        -webkit-box-shadow: 1px 1px 3px #000;
+        box-shadow: 1px 1px 3px #000;
+    }
+
+        .close:hover {
+            background: #00d9ff;
+        }
+</style>
+<a href="@("#openModal" + Model.ProductId)">
+    <li class="product child">
+        @{
+            foreach (var i in Model.Photo)
+            {
+                if (i.Priority)
+                {
+                    <img src="~/PhotoForDB/@i.PhotoUrl" class="productPic" title="@Model.Name" />
+                }
+            }
+            if (Model.Discount != 0)
+            {
+                <div class="discount">
+                    <span class="discountValue">@(Model.Discount + "%")</span>
+                </div>
+                <h3 class="productName">
+                    <p class="price">
+                        <s>@(Model.Price) </s> <font color="red">@(Model.Price - Model.Price * Model.Discount / 100)</font> грн
+                    </p>"@Model.Name"
+                </h3>
+            }
+            else
+            {
+                <h3 class="productName">
+                    <p class="price">@(Model.Price) грн</p>"@Model.Name"
+                </h3>
+            }
+        }
+    </li>
+</a>
+
+<div id="@("openModal" + Model.ProductId)" class="modalDialog">
+    <div>
+        <a href="#close" title="Закрыть" class="close">X</a>
+        @foreach (var a in Model.Photo)
+        {
+            <img id="@("HiddenImgId" + a.PhotoId)" class="" title="@a.Product.Name" src="~/PhotoForDB/@a.PhotoUrl" height="80" width="75" />
+        }
+        <p><strong>Имя -</strong> @Model.Name</p>
+        @{
+            if (Model.Discount != 0)
+            {
+                <p>
+                    <strong>Цена -</strong> @(Model.Price - Model.Price * Model.Discount / 100) грн
+                </p>
+            }
+            else
+            {
+                <p>
+                    <strong>Цена -</strong> @(Model.Price) грн
+                </p>
+            }
+            if (!Model.Description.IsEmpty())
+            {
+                <p><strong>Описание - </strong> @Model.Description</p>
+            }
+            if (!Model.SpecOffer.IsEmpty())
+            {
+                <p><strong>Специальное предложение -</strong> @Model.SpecOffer</p>
+            }
+        }
+        <div class="addBasket">
+            @using (Html.BeginForm("AddToBasket", "Basket"))
+            {
+                <div class="pull-right">
+                    @Html.HiddenFor(x => x.ProductId)
+                    @Html.Hidden("returnUrl", Request.Url?.PathAndQuery)
+                    <input type="submit" class="addBasketText" value="Добавить в корзину" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

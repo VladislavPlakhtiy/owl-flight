@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Domain.Entityes.Product>
+@{
+    ViewBag.Title = "Головна";
+}
+<br />
+<br />
+<br />
+<h2 align="center">---------------------------------------------слайдер-----------------------------------------------</h2>
+<div class="slider">
+    @*метод генирирующий слайдер - разметка (Slider) находиться в папке Houme*@
+    @Html.Action("Slider", "Home")
+</div>
+<h2 align="center">---------------------------------------------слайдер-----------------------------------------------</h2>
+<ul class="products">
+    @foreach (var i in Model)
+    {
+        @Html.Partial("PartialSelling", i)
+    }
+</ul>
+@*метод формирующий представление для плавающей корзины*@
+@Html.Action("BasketOnView", "Basket")
+
+<br />
+<br />
+<br />

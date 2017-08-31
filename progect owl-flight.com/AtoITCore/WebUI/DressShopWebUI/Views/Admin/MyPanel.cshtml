@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Domain.Entityes.Product>
+@using DressShopWebUI.Controllers
+@{
+    ViewBag.Title = "Каталог товаров";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+@if (TempData["messageBad"] != null)
+{
+    <div align="center"><h3 style="color: red">@TempData["message"]</h3></div>
+    <br />
+    <br />
+}
+
+<a href="/Admin/AddProduct" class="btn btn-primary btn-lg">Добавить товар</a>
+<label for="categorySelect">Отсортировать по категории:</label>
+<select id="categorySelect">
+    <option value="@((int)CategoryProduct.None)"></option>
+    <option value="@((int)CategoryProduct.Selling)">ONLINE-гардероб</option>
+    <option value="@((int)CategoryProduct.Gallery)">Галерея</option>
+    <option value="@((int)CategoryProduct.Partners)">Партнерское</option>
+</select>
+<label for="nameSearch">Найти товар по названию:</label>
+<input id="nameSearch" type="text" /><input id="ButtonSearch" type="button" value="Найти" class="btn btn-default btn-xs"/>
+<br /><br />
+
+<div id="divProductInAdmin">
+    @Html.Partial("PartialMyPanel", Model)
+</div>
+
+<script>
+    $(document)
+        .ready(function() {
+            $("#categorySelect")
+                .change(function() {
+                    var data = {
+                        category: $("#categorySelect option:selected").val()
+                    };
+                    $.ajax({
+                        url: "/Admin/MyPanel",
+                        type: "POST",
+                        data: data,
+                        success: function(data) {
+                            $("#divProductInAdmin").html(data);
+                        }
+                    });
+                });
+        });
+    $(document)
+        .ready(function() {
+            $("#ButtonSearch")
+                .click(function () {
+                    var data = {
+                        category: $("#categorySelect option:selected").val(),
+                        searchName: $("#nameSearch").val()
+                    };
+                    debugger;
+                    $.ajax({
+                        url: "/Admin/MyPanel",
+                        type: "POST",
+                        data: data,
+                        success: function(data) {
+                            $("#divProductInAdmin").html(data);
+                        }
+                    });
+                    debugger;
+                });
+            debugger;
+        });
+</script>
