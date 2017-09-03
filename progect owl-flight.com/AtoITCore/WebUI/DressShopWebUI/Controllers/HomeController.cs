@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Domain.Abstrac;
-using Domain.Entityes;
-
 
 namespace DressShopWebUI.Controllers
 {
@@ -19,7 +17,7 @@ namespace DressShopWebUI.Controllers
         }
 
         //страница "Про нас"
-        public ViewResult Index()
+        public ViewResult AboutUs()
         {
             return View();
         }

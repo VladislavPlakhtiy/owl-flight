@@ -43,6 +43,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -64,6 +65,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -85,6 +87,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -106,6 +109,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -127,6 +131,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -148,6 +153,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -169,6 +175,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -190,6 +197,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -211,6 +219,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -232,6 +241,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -253,6 +263,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -274,6 +285,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -295,6 +307,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -316,6 +329,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -337,6 +351,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -358,6 +373,7 @@ namespace DressShopWebUI.Models
                 Xxl = true,
                 Xl3 = true,
                 Xl4 = true,
+                SelectedSize = "select",
                 DateCreate = Now
             });
             Thread.Sleep(10);
@@ -369,8 +385,8 @@ namespace DressShopWebUI.Models
             {
                 SlidePhoto = "indianblack.png",
                 Name = "ВОЖДЬ ІРОКЕЗІВ",
-                Number = 1,
-                SlideDescription = "Щільність: 140-150 г/м2.\n Розміри:  S, M,L, XL,XXL,3XL,4XL\n Країна - виробник: Україна.\n Опис:футболка унісекс 100 % бавовна \n Стиль: класичний."
+                Number = 0,
+                SlideDescription = "Щільність: 140-150 г/м2. Розміри:  S, M,L, XL,XXL,3XL,4XL  Країна - виробник: Україна. Опис: футболка унісекс 100 % бавовна  Стиль: класичний."
             });
             Thread.Sleep(10);
 
@@ -378,8 +394,8 @@ namespace DressShopWebUI.Models
             {
                 SlidePhoto = "three.png",
                 Name = "АКЦІЯ!!!",
-                Number = 2,
-                SlideDescription = "Придбайте 3 футболки ТМ \"OWL FLIGHT\" \n та отримуйте купон-знижка 10 євро \n на послуги з працевлаштування у Польші та Чехії \n від наших партнерів"
+                Number = 1,
+                SlideDescription = "Придбайте 3 футболки ТМ \"OWL FLIGHT\" та отримуйте купон-знижка 10 євро на послуги з працевлаштування у Польші та Чехії від наших партнерів"
             });
             Thread.Sleep(10);
 
@@ -387,8 +403,8 @@ namespace DressShopWebUI.Models
             {
                 SlidePhoto = "photo1.jpg",
                 Name = "Фестиваль \"Україна та Ізраїль разом\"",
-                Number = 3,
-                SlideDescription = "Фестиваль \"Україна і Ізраїль разом\", \n на фото посол України"
+                Number = 2,
+                SlideDescription = "Фестиваль \"Україна і Ізраїль разом\", на фото посол України"
             });
             Thread.Sleep(10);
 
@@ -396,8 +412,8 @@ namespace DressShopWebUI.Models
             {
                 SlidePhoto = "globewhite.png",
                 Name = "ГЛОБУС УКРАЇНИ",
-                Number = 4,
-                SlideDescription = "Щільність: 140-150 г/м2.\n Розміри:  S, M,L, XL,XXL,3XL,4XL\n Країна - виробник: Україна.\n Опис:футболка унісекс 100 % бавовна \n Стиль: класичний."
+                Number = 3,
+                SlideDescription = "Щільність: 140-150 г/м2. Розміри:  S, M,L, XL,XXL,3XL,4XL Країна - виробник: Україна. Опис:футболка унісекс 100 % бавовна  Стиль: класичний."
             });
             Thread.Sleep(10);
 
@@ -405,17 +421,17 @@ namespace DressShopWebUI.Models
             {
                 SlidePhoto = "three.png",
                 Name = "АКЦІЯ!!!",
-                Number = 5,
-                SlideDescription = "Придбайте 3 футболки ТМ \"OWL FLIGHT\" \n та отримуйте купон-знижка 10 євро \n на послуги з працевлаштування у Польші та Чехії \n від наших партнерів"
+                Number = 4,
+                SlideDescription = "Придбайте 3 футболки ТМ \"OWL FLIGHT\" та отримуйте купон-знижка 10 євро  на послуги з працевлаштування у Польші та Чехії  від наших партнерів"
             });
             Thread.Sleep(10);
 
             db.Slider.Add(new Slider
             {
                 SlidePhoto = "applered.png",
-                Name = "Долучайся! \n Купуй! \n Допомагай!",
-                Number = 6,
-                SlideDescription = "Товар, який ви тримаєте в руках, створений зусиллями учасників та волонтерів АТО.\n Тільки при вашій підтримці ми зможемо більше!"
+                Name = "Долучайся! Купуй! Допомагай!",
+                Number = 5,
+                SlideDescription = "Товар, який ви тримаєте в руках, створений зусиллями учасників та волонтерів АТО. Тільки при вашій підтримці ми зможемо більше!"
             });
             Thread.Sleep(10);
 

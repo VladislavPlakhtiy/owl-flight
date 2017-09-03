@@ -112,3 +112,4 @@ D:\ATOIT\owl-flight\progect owl-flight.com\AtoITCore\Domain\Domain\bin\Debug\ru\
 D:\ATOIT\owl-flight\progect owl-flight.com\AtoITCore\Domain\Domain\bin\Debug\ru\System.Web.WebPages.Razor.resources.dll
 D:\ATOIT\owl-flight\progect owl-flight.com\AtoITCore\Domain\Domain\obj\Debug\Domain.dll
 D:\ATOIT\owl-flight\progect owl-flight.com\AtoITCore\Domain\Domain\obj\Debug\Domain.pdb
+D:\ATOIT\owl-flight\progect owl-flight.com\AtoITCore\Domain\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache

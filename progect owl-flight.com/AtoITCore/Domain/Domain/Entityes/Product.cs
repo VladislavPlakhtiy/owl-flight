@@ -49,7 +49,6 @@ namespace Domain.Entityes
         public string Description { get; set; }
 
         [Display(Name = "Стиль")]
-        [Required(ErrorMessage = "Будь ласка, визначте стиль")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Назва стилю від 3 до 50 символів")]
         public string Style { get; set; }
 
@@ -84,6 +83,11 @@ namespace Domain.Entityes
         [Display(Name = "4XL")]
         [Required]
         public bool Xl4 { get; set; }
+
+        [Display(Name = "Оберіть розмір")]
+        [Required(ErrorMessage = "Будь ласка, оберіть розмір футболки")]
+        [StringLength(10, MinimumLength = 1, ErrorMessage = "Будь ласка, оберіть розмір футболки")]
+        public string SelectedSize { get; set; }
 
     }
 }

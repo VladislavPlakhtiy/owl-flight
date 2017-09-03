@@ -193,14 +193,12 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Selling.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Basket\Summary.cshtml" />
     <Content Include="Views\Basket\Index.cshtml" />
-    <Content Include="Views\Home\PartialSelling.cshtml" />
     <Content Include="Views\Basket\Thanks.cshtml" />
     <Content Include="Views\Basket\BasketOnView.cshtml" />
     <Content Include="Views\My\Login.cshtml" />
@@ -214,6 +212,8 @@
     <Content Include="Views\Admin\EditProduct.cshtml" />
     <Content Include="Views\Admin\EditPhoto.cshtml" />
     <Content Include="Views\Home\Slider.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Home\PartialSelling.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

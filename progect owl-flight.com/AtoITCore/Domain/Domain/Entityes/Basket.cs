@@ -69,10 +69,6 @@ namespace Domain.Entityes
             _myCollection.Clear();
         }
 
-        public class BasketLine
-        {
-            public Product Product { get; set; }
-            public string Size { get; set; }
-        }
+       
     }
 }

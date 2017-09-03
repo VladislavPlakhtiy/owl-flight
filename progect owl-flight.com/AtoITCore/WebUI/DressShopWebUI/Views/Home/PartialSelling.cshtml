@@ -1,132 +1,107 @@
 ﻿@model Domain.Entityes.Product
 <style>
-    .modalDialog {
-        position: fixed;
-        font-family: Arial, Helvetica, sans-serif;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: #000000;
-        background: rgba(0,0,0,0.5);
-        z-index: 99999;
-        -webkit-transition: opacity 400ms ease-in;
-        -moz-transition: opacity 400ms ease-in;
-        transition: opacity 400ms ease-in;
+    .field-validation-error {
+        color: #ff0000;
+    }
+
+    .field-validation-valid {
         display: none;
-        pointer-events: none;
     }
 
-    .modalDialog:target {
-            display: block;
-            pointer-events: auto;
-        }
+    .input-validation-error {
+        border: 1px solid #ff0000;
+        background-color: #fee;
+    }
 
-        .modalDialog > div {
-            width: 400px;
-            position: relative;
-            margin: 10% auto;
-            padding: 5px 20px 13px 20px;
-            border-radius: 10px;
-            background: #fff;
-            background: -moz-linear-gradient(#fff, #999);
-            background: -webkit-linear-gradient(#fff, #999);
-            background: -o-linear-gradient(#fff, #999);
-        }
-
-    .close {
-        background: #606061;
-        color: #FFFFFF;
-        line-height: 25px;
-        position: absolute;
-        right: -12px;
-        text-align: center;
-        top: -10px;
-        width: 24px;
-        text-decoration: none;
+    .validation-summary-errors {
         font-weight: bold;
-        -webkit-border-radius: 12px;
-        -moz-border-radius: 12px;
-        border-radius: 12px;
-        -moz-box-shadow: 1px 1px 3px #000;
-        -webkit-box-shadow: 1px 1px 3px #000;
-        box-shadow: 1px 1px 3px #000;
+        color: #ff0000;
     }
 
-        .close:hover {
-            background: #00d9ff;
-        }
+    .validation-summary-valid {
+        display: none;
+    }
 </style>
-<a href="@("#openModal" + Model.ProductId)">
-    <li class="product child">
-        @{
-            foreach (var i in Model.Photo)
-            {
-                if (i.Priority)
-                {
-                    <img src="~/PhotoForDB/@i.PhotoUrl" class="productPic" title="@Model.Name" />
-                }
-            }
-            if (Model.Discount != 0)
-            {
-                <div class="discount">
-                    <span class="discountValue">@(Model.Discount + "%")</span>
-                </div>
-                <h3 class="productName">
-                    <p class="price">
-                        <s>@(Model.Price) </s> <font color="red">@(Model.Price - Model.Price * Model.Discount / 100)</font> грн
-                    </p>"@Model.Name"
-                </h3>
-            }
-            else
-            {
-                <h3 class="productName">
-                    <p class="price">@(Model.Price) грн</p>"@Model.Name"
-                </h3>
-            }
-        }
-    </li>
-</a>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-<div id="@("openModal" + Model.ProductId)" class="modalDialog">
-    <div>
-        <a href="#close" title="Закрыть" class="close">X</a>
-        @foreach (var a in Model.Photo)
-        {
-            <img id="@("HiddenImgId" + a.PhotoId)" class="" title="@a.Product.Name" src="~/PhotoForDB/@a.PhotoUrl" height="80" width="75" />
-        }
-        <p><strong>Имя -</strong> @Model.Name</p>
-        @{
-            if (Model.Discount != 0)
+<img src="~/PhotoForDB/@Model.Photo" alt="">
+<div class="modal_about">
+    @using (Html.BeginForm("AddToBasket", "Basket", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h2>@Model.Name</h2>
+            <h3>@Model.Price грн</h3><br>
+            @if (Model.Composition != null)
             {
-                <p>
-                    <strong>Цена -</strong> @(Model.Price - Model.Price * Model.Discount / 100) грн
-                </p>
+                <p>Склад: @Model.Composition</p>
             }
-            else
+            @if (Model.Density != null)
             {
-                <p>
-                    <strong>Цена -</strong> @(Model.Price) грн
-                </p>
+                <p>Щільність: @Model.Density</p>
             }
-            if (!Model.Description.IsEmpty())
+            @if (Model.Producer != null)
             {
-                <p><strong>Описание - </strong> @Model.Description</p>
+                <p>Країна-виробник: @Model.Producer</p>
             }
-            if (!Model.SpecOffer.IsEmpty())
+            @if (Model.Description != null)
             {
-                <p><strong>Специальное предложение -</strong> @Model.SpecOffer</p>
+                <p>Опис: @Model.Description</p>
             }
-        }
-        <div class="addBasket">
-            @using (Html.BeginForm("AddToBasket", "Basket"))
+            @if (Model.Style != null)
             {
-                <div class="pull-right">
-                    @Html.HiddenFor(x => x.ProductId)
-                    @Html.Hidden("returnUrl", Request.Url?.PathAndQuery)
-                    <input type="submit" class="addBasketText" value="Добавить в корзину" />
+                <p>Стиль: @Model.Style</p>
+            }
+            <br>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectedSize, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (Model.S)
+                    {
+                        <input name="SelectedSize" id="Radio1" type="radio" value="S" data-val-required="будь ласка, оберіть розмір" data-val="true"><label style="margin: 5px">S</label>
+                    }
+                    @if (Model.M)
+                    {
+                        <input name="SelectedSize" id="Radio2" type="radio" value="M" data-val-required="будь ласка, оберіть розмір" data-val="true"><label style="margin: 5px">M</label>
+                    }
+                    @if (Model.L)
+                    {
+                        <input name="SelectedSize" id="Radio3" type="radio" value="L" data-val-required="будь ласка, оберіть розмір" data-val="true"><label style="margin: 5px">L</label>
+                    }
+                    @if (Model.Xl)
+                    {
+                        <input name="SelectedSize" id="Radio4" type="radio" value="XL" data-val-required="будь ласка, оберіть розмір" data-val="true"><label style="margin: 5px">XL</label>
+                    }
+                    @if (Model.Xxl)
+                    {
+                        <input name="SelectedSize" id="Radio5" type="radio" value="XXL" data-val-required="будь ласка, оберіть розмір" data-val="true"><label style="margin: 5px">XXL</label>
+                    }
+                    @if (Model.Xl3)
+                    {
+                        <input name="SelectedSize" id="Radio6" type="radio" value="3XL" data-val-required="будь ласка, оберіть розмір" data-val="true"><label style="margin: 5px">3XL</label>
+                    }
+                    @if (Model.Xl4)
+                    {
+                        <input name="SelectedSize" id="Radio7" type="radio" value="4XL" data-val-required="будь ласка, оберіть розмір" data-val="true"><label style="margin: 5px">4XL</label>
+                    }
+                    @Html.ValidationMessageFor(model => model.SelectedSize, "", new { @class = "text-danger" })
+
                 </div>
-            }
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.Hidden("returnUrl", Request.Url?.PathAndQuery)
+                    <input type="submit" value="Додати в кошик" class="btn btn-default"/>
+                </div>
+            </div>
         </div>
-    </div>
+
+    }
+
 </div>

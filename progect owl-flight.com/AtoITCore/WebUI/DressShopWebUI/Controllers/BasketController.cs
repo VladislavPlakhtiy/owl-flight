@@ -62,14 +62,15 @@ namespace DressShopWebUI.Controllers
         }
 
         //Метод добавления товаров в корзину
-        public RedirectToRouteResult AddToBasket(Basket basket, int productId, string size, string returnUrl)
+        [HttpPost]
+        public RedirectToRouteResult AddToBasket(Basket basket, Product prod,  string returnUrl)
         {
              Product product = _productRepository.Products
-                .FirstOrDefault(b => b.ProductId == productId);
+                .FirstOrDefault(b => b.ProductId ==prod.ProductId );
 
             if (product != null)
             {
-                basket.AddProduct(product, size);
+                basket.AddProduct(product, prod.SelectedSize);
             }
 
             return RedirectToAction("Index", new { returnUrl });
