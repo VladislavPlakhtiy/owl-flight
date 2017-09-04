@@ -25,8 +25,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Редактор товаров", "MyPanel", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>*@
-                    <li>@Html.ActionLink("Вернуться на сайт", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Товари", "MyPanel", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Слайдер", "SliderResult", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Замовлення", "OrdeResult", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Повернутись на сайт", "Selling", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
                 </ul>
             </div>
         </div>

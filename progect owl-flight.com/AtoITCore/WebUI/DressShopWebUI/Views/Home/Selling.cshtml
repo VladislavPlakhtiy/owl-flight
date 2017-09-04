@@ -3,10 +3,33 @@
 @{
     ViewBag.Title = "Головна";
 }
-@*метод генирирующий слайдер - разметка (Slider) находиться в папке Houme*@
-@Html.Action("Slider", "Home")
+<style>
+    .field-validation-error {
+        color: #ff0000;
+    }
+
+    .field-validation-valid {
+        display: none;
+    }
+
+    .input-validation-error {
+        border: 1px solid #ff0000;
+        background-color: #fee;
+    }
+
+    .validation-summary-errors {
+        font-weight: bold;
+        color: #ff0000;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
 
 <main class="catalog">
+    @*метод генирирующий слайдер - разметка (Slider) находиться в папке Houme*@
+    @Html.Action("Slider", "Home")
     <div class="catalog_product">
         @{
             int classProduct = 1;
@@ -29,49 +52,47 @@
         }
 
     </div>
-    <div class="up">
         @Html.Action("BasketOnView", "Basket")
-    </div>
 
     <section class="smth">
         <div class="smth_table">
             <h4>Таблица розмеров</h4>
             <table class="size_table">
                 <thead>
-                    <tr>
-                        <th>размер EURO </th>
-                        <th style="text-align: center"> S</th>
-                        <th style="text-align: center"> M</th>
-                        <th style="text-align: center"> L</th>
-                        <th style="text-align: center"> XL</th>
-                        <th style="text-align: center"> XXL</th>
-                    </tr>
+                <tr>
+                    <th>размер EURO </th>
+                    <th style="text-align: center"> S</th>
+                    <th style="text-align: center"> M</th>
+                    <th style="text-align: center"> L</th>
+                    <th style="text-align: center"> XL</th>
+                    <th style="text-align: center"> XXL</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">размер RUS</th>
-                        <td>40-42</td>
-                        <td>44-46</td>
-                        <td>48-50</td>
-                        <td>52-54</td>
-                        <td>56-58</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">ширина талии</th>
-                        <td>49</td>
-                        <td>50</td>
-                        <td>55</td>
-                        <td>59</td>
-                        <td>61</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">довжина</th>
-                        <td>70</td>
-                        <td>72</td>
-                        <td>75</td>
-                        <td>76</td>
-                        <td>78</td>
-                    </tr>
+                <tr>
+                    <th scope="row">размер RUS</th>
+                    <td>40-42</td>
+                    <td>44-46</td>
+                    <td>48-50</td>
+                    <td>52-54</td>
+                    <td>56-58</td>
+                </tr>
+                <tr>
+                    <th scope="row">ширина талии</th>
+                    <td>49</td>
+                    <td>50</td>
+                    <td>55</td>
+                    <td>59</td>
+                    <td>61</td>
+                </tr>
+                <tr>
+                    <th scope="row">довжина</th>
+                    <td>70</td>
+                    <td>72</td>
+                    <td>75</td>
+                    <td>76</td>
+                    <td>78</td>
+                </tr>
                 </tbody>
             </table>
         </div>

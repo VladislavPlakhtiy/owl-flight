@@ -17,7 +17,6 @@ namespace Domain.Entityes
         /// </summary>
         private readonly List<BasketLine> _myCollection = new List<BasketLine>();
 
-
         //ответ пользователю
         public List<string> AnswerList { get; set; }
         public IEnumerable<BasketLine> Lines => _myCollection;
@@ -43,9 +42,17 @@ namespace Domain.Entityes
         /// <summary>
         /// Удаление товара из корзины
         /// </summary>
-        public void RemoveProduct(Product product)
+        public void RemoveProduct( int line)
         {
-            _myCollection.RemoveAll(x => x.Product.ProductId == product.ProductId);
+            BasketLine remove = new BasketLine();
+            foreach (var i in _myCollection)
+            {
+                if (i.GetHashCode() == line)
+                {
+                    remove = i;
+                } 
+            }
+            _myCollection.Remove(remove);
         }
 
         /// <summary>
@@ -68,7 +75,5 @@ namespace Domain.Entityes
         {
             _myCollection.Clear();
         }
-
-       
     }
 }

@@ -84,11 +84,11 @@ namespace Domain.Concrete
                 _context.Product.Remove(pro);
                 _context.SaveChanges();
 
-                foreach (FileInfo file in directory.GetFiles()) //Удаление фото из директории
-                {
-                    if (urlPhoto.Equals(file.ToString()))
-                        file.Delete();
-                }
+                //foreach (FileInfo file in directory.GetFiles()) //Удаление фото из директории
+                //{
+                //    if (urlPhoto.Equals(file.ToString()))
+                //        file.Delete();
+                //}
             }
             else
                 throw new Exception();

@@ -31,49 +31,44 @@ namespace DressShopWebUI.Controllers
         //#region Работа с товарами
 
         ////------------------------------------------------Стартовая страница------------------------------------------------------------------
-        //public ActionResult MyPanel()
-        //{
-        //    return View(_productRepository.Products.
-        //        OrderByDescending(x => x.DateCreate));
-        //}
+        public ActionResult MyPanel()
+        {
+            return View(_productRepository.Products.
+                OrderByDescending(x => x.DateCreate));
+        }
 
-        //[HttpPost]
-        ////Сортировка и поиск по имени продукта
-        //public ActionResult MyPanel(string searchName, CategoryProduct category)
-        //{
-        //    var product = _productRepository.Products;
-        //    if (!string.IsNullOrEmpty(searchName))
-        //    {
-        //        //поиск в коллекции продуктов продукта по имени
-        //        var enumerable = product as IList<Product> ?? product.ToList();
-        //        var qvery = enumerable.Where(s => s.Name.Equals(searchName)).ToList();
-        //        if (qvery.Count != 0)
-        //        {
-        //            TempData["message"] = $"Выбран товар по имени - \"{searchName}\"";
-        //            return PartialView("PartialMyPanel", qvery);
-        //        }
-        //        //если ничего не найденно 
-        //        TempData["message"] = $"Товара с именем - \"{searchName}\" не существует!";
-        //        return PartialView("PartialMyPanel", enumerable);
-        //    }
-        //    switch (category)
-        //    {
-
-        //        case CategoryProduct.Selling:
-        //            product = product.Where(x => x.Category == "Selling").
-        //                OrderByDescending(x => x.DateCreate);
-        //            break;
-        //        case CategoryProduct.Gallery:
-        //            product = product.Where(x => x.Category == "Gallery").
-        //                OrderByDescending(x => x.DateCreate);
-        //            break;
-        //        case CategoryProduct.Partners:
-        //            product = product.Where(x => x.Category == "Partners").
-        //                OrderByDescending(x => x.DateCreate);
-        //            break;
-        //    }
-        //    return PartialView("PartialMyPanel", product);
-        //}
+        [HttpPost]
+        //Сортировка и поиск по имени продукта
+        public ActionResult MyPanel(string searchName, SortType sortType)
+        {
+            var product = _productRepository.Products;
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                //поиск в коллекции продуктов продукта по имени
+                var enumerable = product as IList<Product> ?? product.ToList();
+                var qvery = enumerable.Where(s => s.Name.Equals(searchName)).ToList();
+                if (qvery.Count != 0)
+                {
+                    TempData["message"] = $"Обран товар по имені - \"{searchName}\"";
+                    return PartialView("PartialMyPanel", qvery);
+                }
+                //если ничего не найденно 
+                TempData["message"] = $"Товару з іменем - \"{searchName}\" не існує!";
+                return PartialView("PartialMyPanel", enumerable);
+            }
+            switch (sortType)
+            {
+                case SortType.Before:
+                    product = _productRepository.Products.
+                        OrderByDescending(x => x.DateCreate);
+                    break;
+                case SortType.Later:
+                    product = _productRepository.Products.
+                        OrderBy(x => x.DateCreate);
+                    break;
+            }
+            return PartialView("PartialMyPanel", product);
+        }
 
         ////------------------------------------------------------------------------------------------------------------------------------------
 
@@ -156,13 +151,13 @@ namespace DressShopWebUI.Controllers
         ////------------------------------------------------------------------------------------------------------------------------------------
 
         ////------------------------------------------------Редактировние товара----------------------------------------------------------------
-        //[HttpGet]
-        //public ActionResult EditProduct(int productId)
-        //{
-        //    var product = _productRepository.Products.FirstOrDefault(x => x.ProductId == productId);
+        [HttpGet]
+        public ActionResult EditProduct(int productId)
+        {
+            var product = _productRepository.Products.FirstOrDefault(x => x.ProductId == productId);
 
-        //    return View(product);
-        //}
+            return View(product);
+        }
 
         //[HttpPost]
         //public ActionResult EditProduct(Product product)
@@ -190,21 +185,21 @@ namespace DressShopWebUI.Controllers
         //}
 
         ////------------------------------------------------Удаление товара---------------------------------------------------------------------
-        //[HttpPost]
-        //public ActionResult DeleteProduct(int productId)
-        //{
-        //    DirectoryInfo directory = new DirectoryInfo(Server.MapPath("~/PhotoForDB/"));
-        //        try
-        //        {
-        //            _productRepository.RemoveProduct(productId, directory);
-        //            TempData["message"] = "Товар был успешно удален!";
-        //        }
-        //        catch (Exception)
-        //        {
-        //            TempData["message"] = "что то пошло не так :( Товар не был удален!";
-        //        }
-        //    return RedirectToAction("MyPanel");
-        //}
+        [HttpPost]
+        public ActionResult DeleteProduct(int productId)
+        {
+            DirectoryInfo directory = new DirectoryInfo(Server.MapPath("~/PhotoForDB/"));
+            try
+            {
+                _productRepository.RemoveProduct(productId, directory);
+                TempData["message"] = "Товар був успішно видалений!";
+            }
+            catch (Exception)
+            {
+                TempData["message"] = "Щось не так :( Товар не був видалений!";
+            }
+            return RedirectToAction("MyPanel");
+        }
 
         ////------------------------------------------------------------------------------------------------------------------------------------
 
@@ -280,15 +275,15 @@ namespace DressShopWebUI.Controllers
 
         //#endregion
 
-        //#region Работа с отзывами
+        #region Работа cо слайдером
         ////------------------------------------------------Стартовая страница------------------------------------------------------------------
-        //[HttpGet]
-        //public ActionResult EditingReviews()
-        //{
-        //    //выбираем все отзывы
-        //    return View(_reviewsRepository.Reviewses.
-        //                OrderByDescending(x => x.DateFeedback));
-        //}
+        [HttpGet]
+        public ActionResult SliderResult()
+        {
+            //выбираем все отзывы
+            return View(_sliderRepository.Sliders.
+                        OrderBy(x => x.Number));
+        }
 
         //[HttpPost]
         //public ActionResult EditingReviews(SortType sortType)
@@ -372,9 +367,19 @@ namespace DressShopWebUI.Controllers
         //    }
         //}
         ////------------------------------------------------------------------------------------------------------------------------------------
-        //#endregion
+        #endregion
 
+        #region работа с заказами
+
+        public ActionResult OrdeResult()
+        {
+            return View();
+        }
+
+        #endregion
     }
+
+
     //emum для сортировки по дате
     public enum SortType
     {
@@ -383,12 +388,6 @@ namespace DressShopWebUI.Controllers
         Later = 2
     }
     //emum для сортировки по категории
-    public enum CategoryProduct
-    {
-        None = 0,
-        Selling = 1,
-        Gallery = 2,
-        Partners = 3
-    }
+ 
 
 }

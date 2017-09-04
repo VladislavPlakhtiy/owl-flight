@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using Domain.Abstrac;
 using Domain.Entityes;
@@ -45,6 +46,26 @@ namespace DressShopWebUI.Controllers
                 //Отсылаем письма
                 _emailSending.SendMailToAdministrator(basket,basketViewModel.Orders,null);
                 _emailSending.SendMail(basket, basketViewModel.Orders, null);
+                //записываем покупку в базу
+                StringBuilder order = new StringBuilder();
+                foreach (var i in basket.Lines)
+                {
+                    order.Append($"{i.Product.Name} розмір - {i.Size}");
+                }
+                OrderDetails newOrder = new OrderDetails
+                {
+                    ClientName = basketViewModel.Orders.ClientName,
+                    Email = basketViewModel.Orders.Email,
+                    Phone = basketViewModel.Orders.Phone,
+                    Payment = basketViewModel.Orders.Payment,
+                    Delivery = basketViewModel.Orders.Delivery,
+                    Address = basketViewModel.Orders.Address,
+                    Status = "Нове замовлення",
+                    Сomment = basketViewModel.Orders.Сomment,
+                    DateOrder = basketViewModel.Orders.DateOrder,
+                    Order = order.ToString()
+                };
+                _orderRepository.SaveOrder(newOrder);
                 return RedirectToAction("Thanks","Basket");
             }
            
@@ -61,30 +82,34 @@ namespace DressShopWebUI.Controllers
             return View();
         }
 
-        //Метод добавления товаров в корзину
-        [HttpPost]
-        public RedirectToRouteResult AddToBasket(Basket basket, Product prod,  string returnUrl)
+        //Метод добавления товаров в корзину с переходом на оформление заказа
+        public ActionResult AddToBasket(Basket basket, int productId, string selectedSize, string returnUrl, string action)
         {
              Product product = _productRepository.Products
-                .FirstOrDefault(b => b.ProductId ==prod.ProductId );
-
+                .FirstOrDefault(b => b.ProductId == productId);
             if (product != null)
             {
-                basket.AddProduct(product, prod.SelectedSize);
+                basket.AddProduct(product, selectedSize);
             }
-
-            return RedirectToAction("Index", new { returnUrl });
+            if (action == "addAndGo")
+            {
+                return RedirectToAction("Index", new { returnUrl });
+            }
+            else
+            {
+                return Redirect(returnUrl);
+            }
+           
         }
 
-        //Метод удаления товаров из корзины
-        public RedirectToRouteResult RemoveFromBasket(Basket basket, int productId, string returnUrl)
-        {
-            Product product = _productRepository.Products
-                .FirstOrDefault(b => b.ProductId == productId);
+        //метод добавления товара в корзину 
 
-            if (product != null)
+        //Метод удаления товаров из корзины
+        public RedirectToRouteResult RemoveFromBasket(Basket basket, int line, string returnUrl)
+        {
+            if (line != 0)
             {
-                basket.RemoveProduct(product);
+                basket.RemoveProduct(line);
             }
 
             return RedirectToAction("Index", new { returnUrl });

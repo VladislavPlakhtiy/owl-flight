@@ -11,7 +11,7 @@ namespace DressShopWebUI.Models
         public string ReturnUrl { get; set; }
 
         //поле с сущностью для оформления покупки
-        public OrderDetails Orders { get; set; }
+        public Order Orders { get; set; }
 
     }
 }

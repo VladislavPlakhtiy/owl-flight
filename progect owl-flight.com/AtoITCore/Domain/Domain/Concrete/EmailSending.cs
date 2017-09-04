@@ -15,7 +15,7 @@ namespace Domain.Concrete
         /// <summary>
         /// Отправка письма администратору
         /// </summary>
-        public  void SendMailToAdministrator(Basket basket, OrderDetails details, string attachFile = null)
+        public  void SendMailToAdministrator(Basket basket, Order details, string attachFile = null)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Domain.Concrete
         /// <summary>
         /// ОТПРАВКА ПИСЬМА ПОЛЬЗОВАТЕЛЮ
         /// </summary>
-        public void SendMail(Basket basket, OrderDetails details, string attachFile = null)
+        public void SendMail(Basket basket, Order details, string attachFile = null)
         {
             try
             {
@@ -76,16 +76,20 @@ namespace Domain.Concrete
             catch (Exception)
             {
                 basket.AnswerList.Clear();
-                basket.AnswerList.Add($"Що щось пішло не так, ми не змогли відправити лист на Ваш E-mail ({details.Email}) ");
+                basket.AnswerList.Add($"Щось пішло не так, ми не змогли відправити лист на Ваш E-mail ({details.Email}) ");
                 basket.AnswerList.Add("");
-                basket.AnswerList.Add("Просимо вибачення, за технічні неполадки.");
+                basket.AnswerList.Add("Просимо вибачення, за технічні проблеми.");
+                basket.AnswerList.Add("");
+                basket.AnswerList.Add("Ваше замовлення передано адміністратору, скоро ми з вами зв'яжемося, гарного вам дня!");
+                basket.AnswerList.Add("");
+               
             }
         }
 
         /// <summary>
         /// формирование текста письма для пользователя
         /// </summary>
-        public static string EmailMessage(Basket basket, OrderDetails details)
+        public static string EmailMessage(Basket basket, Order details)
         {
             StringBuilder str = new StringBuilder();
             str.AppendLine("");
@@ -130,7 +134,7 @@ namespace Domain.Concrete
         /// <summary>
         /// метод для формирования тела письма Администратору
         /// </summary>
-        public static string EmailMessageToAdministrator(Basket basket, OrderDetails details)
+        public static string EmailMessageToAdministrator(Basket basket, Order details)
         {
             StringBuilder str = new StringBuilder();
             str.AppendLine("");
